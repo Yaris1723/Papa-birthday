@@ -46,6 +46,8 @@ export default function Controls({
     pageLabel = "Front Cover";
   } else if (isBackCover) {
     pageLabel = "Back Cover";
+  } else if (flippedCount === totalLeaves - 1) {
+    pageLabel = "🌟 Celebration 🎂";
   } else {
     const leftPage = (flippedCount - 1) * 2 + 1;
     const rightPage = leftPage + 1;

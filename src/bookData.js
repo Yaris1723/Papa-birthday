@@ -5,14 +5,15 @@
  * Images loaded from your PDF export:
  * - Cover: First cover page.png
  * - Pages: Page-1 to Page-8
- * - Back Cover: Last cover page.png
+ * - Poster: Last cover page.png (23rd Birthday Sunset Ocean Poster)
+ * - Climax: Interactive Candle Blowing Page with "Happy Birthday Goddess" button!
  */
 
 export const bookConfig = {
-  title: "Happy Birthday Manisa ✨",
+  title: "Happy Birthday Goddess Manisa ✨",
   subtitle: "Click the book or use arrow keys to flip through the pages",
-  personName: "Manisa",
-  celebrationDate: "Special Birthday Edition",
+  personName: "Jai Manisa",
+  celebrationDate: "October 21 • 23 Years",
 
   // Book Dimensions: calibrated to the exact 941x1672 aspect ratio of your pages
   width: 360,           // Width of a single page in px (opened book is 720px)
@@ -20,10 +21,10 @@ export const bookConfig = {
   borderRadius: 8,      // Page corner curvature
   shadow: {
     color: "#000000",
-    opacity: 0.45,
-    blur: 30,
+    opacity: 0.55,
+    blur: 35,
     offsetX: 10,
-    offsetY: 15,
+    offsetY: 18,
     spread: 0,
   },
 
@@ -32,7 +33,7 @@ export const bookConfig = {
 
 /**
  * 📖 BOOK PAGES (Ordered sequence)
- * Total: 10 pages = 5 leaves (front & back)
+ * Total: 12 pages = 6 leaves (front & back)
  */
 export const bookPages = [
   // Leaf 0: Front Cover & Page 1
@@ -51,7 +52,21 @@ export const bookPages = [
   "/images/Page-6.png",       // Page 6
   "/images/Page-7.png",       // Page 7
 
-  // Leaf 4: Page 8 & Back Cover
-  "/images/Page-8.png",       // Page 8
-  "/images/backcover.png",    // Back Cover
+  // Leaf 4: Page 8 & 23rd Birthday Sunset Ocean Poster
+  "/images/Page-8.png",       // Page 8 (Heartfelt Letter to Papa)
+  "/images/backcover.png",    // 23rd Birthday Sunset Poster (Jai Manisa Kirubakaran)
+
+  // Leaf 5: Interactive Candle & Grand Celebration Climax!
+  {
+    type: "celebrationPage",
+    title: "Happy Birthday Goddess",
+    personName: "Jai Manisa",
+    age: 23,
+  },
+  {
+    type: "backCover",
+    monogram: "M",
+    subtitle: "Happy 23rd Birthday Jai Manisa Kirubakaran • October 21",
+    editionText: "Infinite Love • Forever Yours ❤️",
+  }
 ];

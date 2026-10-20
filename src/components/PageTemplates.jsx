@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Sparkles, Heart, Star, Cake, Flame, Volume2, Camera, Quote } from 'lucide-react';
+import { Sparkles, Heart, Star, Cake, Flame, Volume2, Camera, Quote, Crown, PartyPopper } from 'lucide-react';
+import { playBlowCandleSound, playCelebrationChime } from '../utils/sound';
 
 export function PageRenderer({ pageData, isBackFace = false }) {
   // If pageData is just a string URL, render image directly like original Framer
@@ -65,6 +66,8 @@ export function PageRenderer({ pageData, isBackFace = false }) {
       return <FutureChapterPage data={pageData} />;
     case 'closingLetter':
       return <ClosingLetterPage data={pageData} />;
+    case 'celebrationPage':
+      return <CelebrationGoddessPage data={pageData} />;
     case 'backCover':
       return <BackCoverPage data={pageData} />;
     default:
@@ -476,6 +479,155 @@ function BackCoverPage({ data }) {
       <div className="back-bottom">
         <div className="barcode-mock">{data.barcode || "||| | || |||| | ||| ||"}</div>
         <p className="edition-text">{data.editionText || "Collector’s Edition • 2026"}</p>
+      </div>
+    </div>
+  );
+}
+
+// -------------------------------------------------------------
+// CLIMAX: INTERACTIVE CANDLE & "HAPPY BIRTHDAY GODDESS" PAGE
+// -------------------------------------------------------------
+function CelebrationGoddessPage({ data }) {
+  const [blownOut, setBlownOut] = useState(false);
+
+  const handleCelebrate = (e) => {
+    e.stopPropagation();
+
+    if (!blownOut) {
+      setBlownOut(true);
+
+      // Play audio effects
+      playBlowCandleSound();
+      setTimeout(() => {
+        playCelebrationChime();
+      }, 300);
+
+      // Multi-stage confetti celebration
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { x: 0.45, y: 0.55 },
+        colors: ['#fbbf24', '#f43f5e', '#ec4899', '#a855f7', '#fde047'],
+      });
+
+      setTimeout(() => {
+        confetti({
+          particleCount: 100,
+          spread: 90,
+          origin: { x: 0.55, y: 0.55 },
+          colors: ['#ffd700', '#f43f5e', '#ffffff', '#38bdf8'],
+        });
+      }, 220);
+
+      setTimeout(() => {
+        confetti({
+          particleCount: 140,
+          spread: 120,
+          origin: { x: 0.5, y: 0.4 },
+          shapes: ['circle', 'square'],
+          colors: ['#fbbf24', '#f472b6', '#38bdf8', '#fb7185', '#ffd700'],
+        });
+      }, 500);
+    } else {
+      // Relight candle
+      setBlownOut(false);
+    }
+  };
+
+  return (
+    <div className="celebration-goddess-page interactive-no-flip">
+      {/* Decorative Gold Border */}
+      <div className="goddess-gold-border">
+        <div className="corner-decor top-left">✦</div>
+        <div className="corner-decor top-right">✦</div>
+        <div className="corner-decor bottom-left">✦</div>
+        <div className="corner-decor bottom-right">✦</div>
+      </div>
+
+      {/* Top Badge */}
+      <div className="goddess-decor-top">
+        <Crown size={15} className="gold-crown-icon" />
+        <span className="goddess-chapter-tag">23 YEARS OF PURE MAGIC</span>
+        <Crown size={15} className="gold-crown-icon" />
+      </div>
+
+      {/* Header */}
+      <div className="goddess-heading-cluster">
+        <h2 className="goddess-script-title">Make a Wish</h2>
+        <h3 className="goddess-name-title">JAI MANISA</h3>
+        <div className="gold-divider">
+          <span className="divider-line" />
+          <span className="divider-gem">👑</span>
+          <span className="divider-line" />
+        </div>
+        <p className="goddess-sub-text">
+          Blow the candles and step into your most radiant chapter yet ✨
+        </p>
+      </div>
+
+      {/* 3D Cake & 3 Glowing Candles Stage */}
+      <div className="goddess-cake-stage interactive-no-flip" onClick={handleCelebrate}>
+        <div className="candles-cluster">
+          {[0, 1, 2].map((idx) => (
+            <div key={idx} className="goddess-candle-item">
+              <div className={`flame-wrap ${blownOut ? 'extinguished' : 'burning'}`}>
+                <div className="flame-core" />
+                <div className="flame-glow" />
+              </div>
+              {blownOut && <div className="smoke-puff">💨</div>}
+              <div className="candle-stick">
+                <div className="candle-stripes" />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Cake illustration */}
+        <div className="cake-container">
+          <div className="cake-layer top-layer">
+            <div className="frosting-drops">
+              <span /><span /><span /><span /><span />
+            </div>
+            <div className="cherries">🍓 ✦ 🍒 ✦ 🍓</div>
+          </div>
+          <div className="cake-layer middle-layer">
+            <div className="cake-cream-ribbon" />
+          </div>
+          <div className="cake-layer base-layer" />
+          <div className="cake-plate" />
+        </div>
+      </div>
+
+      {/* Message Card upon blowing */}
+      {blownOut ? (
+        <div className="goddess-wish-card">
+          <div className="wish-badge">
+            <Sparkles size={14} />
+            <span>WISH GRANTED!</span>
+            <Sparkles size={14} />
+          </div>
+          <p className="wish-message">
+            “Happy Birthday, Goddess! May the universe return to you all the light, love, and laughter you give so effortlessly. Forever shining, Papa. ❤️”
+          </p>
+        </div>
+      ) : (
+        <p className="goddess-hint-text">
+          🕯️ Tap the candles or the button below to blow them out!
+        </p>
+      )}
+
+      {/* The Requested "Happy Birthday Goddess" Button */}
+      <div className="goddess-action-area interactive-no-flip">
+        <button
+          className={`happy-birthday-goddess-btn ${blownOut ? 'relight-state' : 'celebrate-state'}`}
+          onClick={handleCelebrate}
+        >
+          <Crown size={20} className="btn-crown-icon" />
+          <span className="btn-text-content">
+            {blownOut ? "🎉 Happy Birthday Goddess! (Wish Again 🕯️)" : "👑 Happy Birthday Goddess ✨"}
+          </span>
+          <Sparkles size={18} className="btn-sparkle-icon" />
+        </button>
       </div>
     </div>
   );

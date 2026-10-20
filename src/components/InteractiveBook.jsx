@@ -188,7 +188,12 @@ const InteractiveBook = forwardRef(function InteractiveBook(props, ref) {
   // Handle click on book: detect left or right side when open
   const handleBookClick = (e) => {
     // If user clicked inside an interactive button (e.g. candle button), don't flip
-    if (e.target.closest('button') || e.target.closest('.cake-stage')) {
+    if (
+      e.target.closest('button') ||
+      e.target.closest('.cake-stage') ||
+      e.target.closest('.goddess-cake-stage') ||
+      e.target.closest('.interactive-no-flip')
+    ) {
       return;
     }
 
