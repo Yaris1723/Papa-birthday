@@ -8,8 +8,8 @@
 }
 
 :root {
-  --bg-primary: #0a0915;
-  --bg-secondary: #131127;
+  --bg-primary: #000000;
+  --bg-secondary: #050505;
   --gold-primary: #fbbf24;
   --gold-light: #fef08a;
   --gold-dark: #b45309;
@@ -25,7 +25,7 @@
 html, body {
   width: 100%;
   height: 100%;
-  background-color: var(--bg-primary);
+  background-color: #000000;
   color: #f3f4f6;
   font-family: var(--font-sans);
   overflow-x: hidden;
@@ -51,7 +51,7 @@ html, body {
   flex-direction: column;
   justifyContent: space-between;
   align-items: center;
-  background: radial-gradient(circle at 50% 20%, #1e1b4b 0%, #0c0a1f 60%, #05040a 100%);
+  background: #000000;
   overflow: hidden;
 }
 
@@ -1002,13 +1002,13 @@ html, body {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(19, 17, 39, 0.8);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   padding: 6px 12px;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 20px rgba(251, 191, 36, 0.12);
 }
 
 .control-btn {
@@ -1058,18 +1058,6 @@ html, body {
 
 .confetti-btn:hover {
   color: #f43f5e;
-}
-
-.edit-btn {
-  background: rgba(251, 191, 36, 0.15);
-  border: 1px solid rgba(251, 191, 36, 0.3);
-  color: #fbbf24;
-  padding: 8px 12px;
-}
-
-.edit-btn:hover {
-  background: rgba(251, 191, 36, 0.25);
-  color: #fef08a;
 }
 
 .controls-divider {
@@ -1380,9 +1368,6 @@ html, body {
     font-size: 0.75rem;
   }
   .btn-text {
-    display: none;
-  }
-  .edit-btn-label {
     display: none;
   }
   .form-grid {

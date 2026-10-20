@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import InteractiveBook from './components/InteractiveBook';
 import Controls from './components/Controls';
-import QuickEditModal from './components/QuickEditModal';
+import Starfield from './components/Starfield';
 import { bookConfig as initialConfig, bookPages as initialPages } from './bookData';
-import { Sparkles, Heart } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 export default function App() {
   const [config, setConfig] = useState(initialConfig);
@@ -11,7 +11,6 @@ export default function App() {
   const [soundEnabled, setSoundEnabled] = useState(initialConfig.soundEnabledDefault ?? true);
   const [flippedCount, setFlippedCount] = useState(0);
   const [totalLeaves, setTotalLeaves] = useState(0);
-  const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [scale, setScale] = useState(1);
 
   const bookRef = useRef(null);
@@ -50,16 +49,8 @@ export default function App() {
 
   return (
     <div className="app-container">
-      {/* Ambient background glow & stars */}
-      <div className="ambient-glow glow-top" />
-      <div className="ambient-glow glow-bottom" />
-      <div className="sparkle-layer">
-        <span className="star-dot dot-1" />
-        <span className="star-dot dot-2" />
-        <span className="star-dot dot-3" />
-        <span className="star-dot dot-4" />
-        <span className="star-dot dot-5" />
-      </div>
+      {/* Black night sky with glittering yellow/gold stars */}
+      <Starfield />
 
       {/* Top Header */}
       <header className="app-header">
@@ -106,19 +97,8 @@ export default function App() {
           onReset={handleReset}
           soundEnabled={soundEnabled}
           onToggleSound={() => setSoundEnabled((prev) => !prev)}
-          onOpenEditor={() => setIsEditorOpen(true)}
         />
       </footer>
-
-      {/* Quick Edit Modal */}
-      <QuickEditModal
-        isOpen={isEditorOpen}
-        onClose={() => setIsEditorOpen(false)}
-        config={config}
-        pages={pages}
-        onSaveConfig={setConfig}
-        onSavePages={setPages}
-      />
     </div>
   );
 }

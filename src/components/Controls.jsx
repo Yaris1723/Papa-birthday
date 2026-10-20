@@ -7,8 +7,7 @@ import {
   VolumeX,
   Sparkles,
   Maximize2,
-  Minimize2,
-  Edit3
+  Minimize2
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -20,7 +19,6 @@ export default function Controls({
   onReset,
   soundEnabled,
   onToggleSound,
-  onOpenEditor,
 }) {
   const isCover = flippedCount === 0;
   const isBackCover = flippedCount === totalLeaves;
@@ -114,16 +112,6 @@ export default function Controls({
           title="Confetti celebration! 🎉"
         >
           <Sparkles size={16} />
-        </button>
-
-        {/* Edit Button */}
-        <button
-          className="control-btn icon-btn edit-btn"
-          onClick={onOpenEditor}
-          title="Customize text & photos"
-        >
-          <Edit3 size={16} />
-          <span className="edit-btn-label">Edit</span>
         </button>
 
         {/* Fullscreen Button */}
